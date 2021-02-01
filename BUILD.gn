@@ -1,0 +1,70 @@
+#
+# Copyright (c) 2020 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+import("//build/lite/config/component/lite_component.gni")
+
+config("libcoap_config") {
+  include_dirs = [
+    "//third_party/libcoap/include/coap2",
+#    "//third_party/lwip/src/include",
+  ]
+}
+
+libcoap_sources = [
+  "//third_party/libcoap/src/address.c",
+  "//third_party/libcoap/src/async.c",
+  "//third_party/libcoap/src/block.c",
+  "//third_party/libcoap/src/coap_asn1.c",
+  "//third_party/libcoap/src/coap_cache.c",
+  "//third_party/libcoap/src/coap_debug.c",
+  "//third_party/libcoap/src/coap_event.c",
+  "//third_party/libcoap/src/coap_gnutls.c",
+  "//third_party/libcoap/src/coap_hashkey.c",
+  "//third_party/libcoap/src/coap_io.c",
+#  "//third_party/libcoap/src/coap_io_riot.c",
+  "//third_party/libcoap/src/coap_mbedtls.c",
+  "//third_party/libcoap/src/coap_notls.c",
+  "//third_party/libcoap/src/coap_openssl.c",
+  "//third_party/libcoap/src/coap_prng.c",
+  "//third_party/libcoap/src/coap_session.c",
+  "//third_party/libcoap/src/coap_tcp.c",
+  "//third_party/libcoap/src/coap_time.c",
+  "//third_party/libcoap/src/coap_tinydtls.c",
+  "//third_party/libcoap/src/encode.c",
+  "//third_party/libcoap/src/mem.c",
+  "//third_party/libcoap/src/net.c",
+  "//third_party/libcoap/src/option.c",
+  "//third_party/libcoap/src/pdu.c",
+  "//third_party/libcoap/src/resource.c",
+  "//third_party/libcoap/src/str.c",
+  "//third_party/libcoap/src/subscribe.c",
+  "//third_party/libcoap/src/uri.c",
+  "//third_party/libcoap/src/hellofunc.c",
+]
+#action("//third_party/libcoap/list.py")
+#exec_script("//third_party/libcoap/list.py")
+#script = "//third_party/libcoap/list.py"
+
+exec_script("//third_party/libcoap/list.py")
+
+lite_library("libcoap") {
+  exec_script("//third_party/libcoap/list.py")
+  target_type = "shared_library"
+  sources = libcoap_sources
+  public_configs = [
+    ":libcoap_config",
+  ]
+}
+
